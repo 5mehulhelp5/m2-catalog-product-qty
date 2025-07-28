@@ -12,6 +12,9 @@ var config = {
             },
             'Magento_Swatches/js/swatch-renderer': {
                 'Infrangible_CatalogProductQty/js/swatch-renderer-mixin': true
+            },
+            'Amasty_Conf/js/swatch-renderer': {
+                'Infrangible_CatalogProductQty/js/swatch-renderer-mixin': true
             }
         }
     }
