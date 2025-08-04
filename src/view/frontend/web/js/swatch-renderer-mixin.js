@@ -14,7 +14,7 @@ define([
         $.widget('mage.SwatchRenderer', widget, {
             _getNewPrices: function () {
                 var qtyInput = $(this.options.qtyInfo);
-                var qtyValue = qtyInput.length > 0 ? qtyInput.val() : 0;
+                var qtyValue = qtyInput.length > 0 ? qtyInput.val() : 1;
 
                 var newPrices = this._super();
 

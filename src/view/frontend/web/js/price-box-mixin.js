@@ -15,24 +15,22 @@ define([
                 if (newPrices) {
                     var qtyInput = $(this.qtyInfo);
 
-                    if (qtyInput) {
-                        var qtyValue = qtyInput.val();
+                    var qtyValue = qtyInput.length > 0 ? qtyInput.val() : 1;
 
-                        $.each(newPrices, function(priceHash, prices) {
-                            if (priceHash !== 'prices') {
-                                $.each(prices, function(price, priceData) {
-                                    if (! priceData.orgAmount) {
-                                        if (priceData.unitAmount) {
-                                            priceData.amount = priceData.unitAmount * qtyValue;
-                                        } else if (priceData.amount) {
-                                            priceData.unitAmount = priceData.amount;
-                                            priceData.amount = priceData.unitAmount * qtyValue;
-                                        }
+                    $.each(newPrices, function(priceHash, prices) {
+                        if (priceHash !== 'prices') {
+                            $.each(prices, function(price, priceData) {
+                                if (! priceData.orgAmount) {
+                                    if (priceData.unitAmount) {
+                                        priceData.amount = priceData.unitAmount * qtyValue;
+                                    } else if (priceData.amount) {
+                                        priceData.unitAmount = priceData.amount;
+                                        priceData.amount = priceData.unitAmount * qtyValue;
                                     }
-                                });
-                            }
-                        });
-                    }
+                                }
+                            });
+                        }
+                    });
                 }
 
                 this._super(newPrices);
@@ -53,7 +51,7 @@ define([
                 }
 
                 var qtyInput = $(this.qtyInfo);
-                var qtyValue = qtyInput.length ? qtyInput.val() : 0;
+                var qtyValue = qtyInput.length > 0 ? qtyInput.val() : 1;
 
                 var totalPrice = tierPrice * qtyValue;
 
