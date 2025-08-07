@@ -19,7 +19,7 @@ define([
 
                     $.each(newPrices, function(priceHash, prices) {
                         if (priceHash !== 'prices') {
-                            $.each(prices, function(price, priceData) {
+                            $.each(prices, function(priceCode, priceData) {
                                 if (! priceData.orgAmount) {
                                     if (priceData.unitAmount) {
                                         priceData.amount = priceData.unitAmount * qtyValue;
@@ -36,6 +36,20 @@ define([
                 this._super(newPrices);
             },
 
+            updateProductTierPrice: function updateProductTierPrice() {
+                var originalPrice,
+                    prices = {'prices': {}};
+
+                if (this.options.prices.finalPrice) {
+                    originalPrice = this.options.prices.finalPrice.amount;
+                    prices.prices.unitPrice = {'amount': this.getPrice('unit') - originalPrice};
+                }
+
+                this.updatePrice(prices);
+
+                this._super();
+            },
+
             getPrice: function(priceKey) {
                 var tierPrice = this._super(priceKey);
 
@@ -46,8 +60,12 @@ define([
                 }
 
                 if (tierPrice === undefined) {
-                    tierPrice = priceKey === 'price' ? this.options.prices.finalPrice.amount :
+                    tierPrice = priceKey === 'price' || priceKey === 'unit' ? this.options.prices.finalPrice.amount :
                         (priceKey === 'basePrice' ? this.options.prices.basePrice.amount : 0);
+                }
+
+                if (priceKey === 'unit') {
+                    return tierPrice;
                 }
 
                 var qtyInput = $(this.qtyInfo);

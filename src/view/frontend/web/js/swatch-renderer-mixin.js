@@ -35,13 +35,15 @@ define([
                     }
                 }
 
-                $.each(newPrices, function(priceHash, priceData) {
-                    if (! priceData.orgAmount) {
-                        if (priceData.unitAmount) {
-                            priceData.amount = priceData.unitAmount * qtyValue;
-                        } else if (priceData.amount) {
-                            priceData.unitAmount = priceData.amount;
-                            priceData.amount = priceData.unitAmount * qtyValue;
+                $.each(newPrices, function(priceCode, priceData) {
+                    if (priceCode !== 'unitPrice') {
+                        if (! priceData.orgAmount) {
+                            if (priceData.unitAmount) {
+                                priceData.amount = priceData.unitAmount * qtyValue;
+                            } else if (priceData.amount) {
+                                priceData.unitAmount = priceData.amount;
+                                priceData.amount = priceData.unitAmount * qtyValue;
+                            }
                         }
                     }
                 });

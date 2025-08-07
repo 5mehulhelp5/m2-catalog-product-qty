@@ -1,0 +1,80 @@
+/**
+ * @author      Andreas Knollmann
+ * @copyright   2014-2025 Softwareentwicklung Andreas Knollmann
+ * @license     http://www.opensource.org/licenses/mit-license.php MIT
+ */
+
+& when (@media-common = true) {
+    .product-options-bottom,
+    .product-info-price {
+        .price-box.price-unit_price {
+            margin-left: 25px;
+
+            .price-container {
+                > span {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .product-options-bottom,
+    .product-info-price {
+        .price-box.price-unit_price {
+            .price-container {
+                font-size: @font-size__xs;
+
+                .price {
+                    font-size: @font-size__s;
+                    line-height: @font-size__s;
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .product-options-bottom,
+    .product-info-price {
+        .price-box.price-unit_price {
+            .price-container {
+                font-size: @font-size__s;
+
+                .price {
+                    font-size: @font-size__l;
+                    line-height: @font-size__l;
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .product-options-bottom,
+    .product-info-price {
+        .price-box.price-unit_price {
+            float: right;
+            text-align: right;
+        }
+
+        .product-info-stock-sku {
+            clear: both;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .product-options-bottom,
+    .product-info-price {
+        .price-box.price-unit_price {
+            float: none;
+            text-align: left;
+        }
+
+        .product-info-stock-sku {
+            clear: none;
+        }
+    }
+}

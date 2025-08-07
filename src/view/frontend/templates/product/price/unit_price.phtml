@@ -1,0 +1,35 @@
+<?php
+
+declare(strict_types=1);
+
+use Infrangible\CatalogProductQty\Block\Catalog\Pricing\Render\UnitPriceBox;
+use Magento\Framework\Escaper;
+use Magento\Framework\Pricing\Price\PriceInterface;
+
+/**
+ * @author      Andreas Knollmann
+ * @copyright   2014-2025 Softwareentwicklung Andreas Knollmann
+ * @license     http://www.opensource.org/licenses/mit-license.php MIT
+ */
+
+/** @var Escaper $escaper */
+/** @var UnitPriceBox $block */
+
+/** @var PriceInterface $finalPriceModel */
+$finalPriceModel = $block->getPriceType('final_price');
+$idSuffix = $block->getDataUsingMethod('id_suffix') ? $block->getDataUsingMethod('id_suffix') : '';
+$schema = $block->getDataUsingMethod('zone') == 'item_view';
+?>
+
+<?= /* @noEscape */
+$block->renderAmount(
+    $finalPriceModel->getAmount(),
+    [
+        'price_id'          => $block->getPriceId('product-price-' . $idSuffix),
+        'price_type'        => 'unitPrice',
+        'display_label'     => __('Unit Price'),
+        'display_caption'   => __('per item'),
+        'include_container' => true,
+        'schema'            => $schema
+    ]
+); ?>
