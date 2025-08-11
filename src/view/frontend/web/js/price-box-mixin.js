@@ -132,6 +132,10 @@ define([
 
                                         var qtySelect2 = qtyField.find('.select2-container .selection .select2-selection .select2-selection__rendered');
                                         if (qtySelect2.length > 0) {
+                                            if (unitPriceHint.length > 0) {
+                                                unitPriceHint.remove();
+                                            }
+
                                             qtySelect2.text(qtySelect2.attr('title') +
                                                 ' (' + formattedPrice + ' / ' + $.mage.__('QtyItem') + ')');
 
