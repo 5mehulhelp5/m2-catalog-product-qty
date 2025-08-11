@@ -10,6 +10,7 @@
         <infrangible_catalogproductqty>
             <product_view>
                 <show_unit_price>0</show_unit_price>
+                <show_unit_price_hint>0</show_unit_price_hint>
             </product_view>
         </infrangible_catalogproductqty>
     </default>

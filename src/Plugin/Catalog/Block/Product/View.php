@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Infrangible\CatalogProductQty\Plugin\Catalog\Block\Product;
 
 use FeWeDev\Base\Json;
+use Infrangible\Core\Helper\Stores;
 
 /**
  * @author      Andreas Knollmann
@@ -16,9 +17,13 @@ class View
     /** @var Json */
     protected $json;
 
-    public function __construct(Json $json)
+    /** @var Stores */
+    protected $storeHelper;
+
+    public function __construct(Json $json, Stores $storeHelper)
     {
         $this->json = $json;
+        $this->storeHelper = $storeHelper;
     }
 
     public function afterGetJsonConfig(\Magento\Catalog\Block\Product\View $subject, string $result): string
@@ -31,6 +36,9 @@ class View
         )) {
             $config[ 'prices' ][ 'unitPrice' ] = $config[ 'prices' ][ 'finalPrice' ];
         }
+
+        $config[ 'unitPrice' ] =
+            $this->storeHelper->getStoreConfigFlag('infrangible_catalogproductqty/product_view/show_unit_price_hint');
 
         return $this->json->encode($config);
     }
