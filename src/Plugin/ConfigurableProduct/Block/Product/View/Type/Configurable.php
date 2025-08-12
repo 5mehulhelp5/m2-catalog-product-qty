@@ -34,6 +34,28 @@ class Configurable
                 $config[ 'optionPrices' ][ $usedProductId ][ 'finalPrice' ];
         }
 
+        if (array_key_exists(
+            'calculatedPrices',
+            $config
+        )) {
+            foreach ($config[ 'calculatedPrices' ] as $calculationId => $calculationPrices) {
+                $config[ 'calculatedPrices' ][ $calculationId ][ 'unitPrice' ] =
+                    $config[ 'calculatedPrices' ][ $calculationId ][ 'finalPrice' ];
+            }
+        }
+
+        if (array_key_exists(
+            'calculatedOptionPrices',
+            $config
+        )) {
+            foreach ($config[ 'calculatedOptionPrices' ] as $calculationId => $calculationOptionPrices) {
+                foreach ($calculationOptionPrices as $usedProductId => $usedProductPrices) {
+                    $config[ 'calculatedOptionPrices' ][ $calculationId ][ $usedProductId ][ 'unitPrice' ] =
+                        $config[ 'calculatedOptionPrices' ][ $calculationId ][ $usedProductId ][ 'finalPrice' ];
+                }
+            }
+        }
+
         return $this->json->encode($config);
     }
 }
