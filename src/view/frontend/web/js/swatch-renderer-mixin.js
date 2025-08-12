@@ -29,6 +29,7 @@ define([
                                 tierPriceItem = tierPrices[i];
                                 if (qtyValue >= tierPriceItem.qty) {
                                     newPrices.finalPrice.unitAmount = tierPriceItem.price;
+                                    newPrices.unitPrice.amount = tierPriceItem.price;
                                 }
                             }
                         }

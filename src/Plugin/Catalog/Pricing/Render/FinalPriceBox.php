@@ -42,6 +42,10 @@ class FinalPriceBox
             return $html;
         }
 
+        if ($subject->getData('price_type_code') !== 'final_price') {
+            return $html;
+        }
+
         if (! $this->storeHelper->getStoreConfigFlag('infrangible_catalogproductqty/product_view/show_unit_price')) {
             return $html;
         }
