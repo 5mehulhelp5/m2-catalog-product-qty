@@ -109,6 +109,12 @@ define([
                     return;
                 }
 
+                var finalPriceBox = $('[data-price-type="finalPrice"]', self.element);
+
+                if (finalPriceBox.length === 0) {
+                    return;
+                }
+
                 _.each(self.cache.displayPrices, function (price, priceCode) {
                     if (priceCode === 'unitPrice') {
                         var priceValue = price.final;
